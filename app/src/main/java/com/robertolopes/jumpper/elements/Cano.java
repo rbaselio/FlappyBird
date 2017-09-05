@@ -6,9 +6,6 @@ import android.graphics.Paint;
 import com.robertolopes.jumpper.graphic.Cores;
 import com.robertolopes.jumpper.graphic.Tela;
 
-/**
- * Created by roberto.lopes on 04/09/2017.
- */
 public class Cano {
     private static final int TAMANHO_DO_CANO = 250;
     private static final int LARGURA_DO_CANO = 100;
