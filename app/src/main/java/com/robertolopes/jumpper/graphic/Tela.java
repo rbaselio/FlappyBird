@@ -6,10 +6,12 @@ import android.view.Display;
 import android.view.WindowManager;
 
 public class Tela {
+    public final Context context;
     private final WindowManager systemService;
     private DisplayMetrics metrics;
 
     public Tela(Context context) {
+        this.context = context;
         systemService = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = systemService.getDefaultDisplay();
         metrics = new DisplayMetrics();
@@ -18,6 +20,5 @@ public class Tela {
 
     public int getAltura(){
         return metrics.heightPixels;
-
     }
 }

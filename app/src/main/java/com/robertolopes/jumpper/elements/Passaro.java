@@ -6,8 +6,9 @@ import android.graphics.Paint;
 import com.robertolopes.jumpper.graphic.Cores;
 import com.robertolopes.jumpper.graphic.Tela;
 
-
 public class Passaro {
+    public static final int DESCE = 1;
+    public static final int SOBE = 2;
     private static final float X = 100;
     private static final float RAIO = 50;
     private static final Paint VERMELHO = Cores.getCorDoPassaro();
@@ -23,15 +24,15 @@ public class Passaro {
         canvas.drawCircle(X, altura, RAIO, VERMELHO);
     }
 
-    public void cai() {
-        boolean chegouNoChao = (altura + RAIO > tela.getAltura());
-        if (!chegouNoChao) this.altura += 5;
-    }
+    public void movimento(int direcao) {
 
-    public void pula() {
-
-        if (altura > RAIO)
-            this.altura -= 150;
-        else this.altura = 0;
+        if (direcao == DESCE) {
+            boolean chegouNoChao = (altura + RAIO > tela.getAltura());
+            if (!chegouNoChao) this.altura += 10;
+        }
+        if (direcao == SOBE) {
+            if (altura > RAIO) this.altura -= 10;
+            else this.altura = RAIO;
+        }
     }
 }

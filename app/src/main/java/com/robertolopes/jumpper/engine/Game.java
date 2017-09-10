@@ -22,6 +22,7 @@ public class Game extends SurfaceView implements Runnable, View.OnTouchListener{
     private Bitmap fundo;
     private Tela tela;
     private Canos canos;
+    private int movimento = Passaro.DESCE;
 
     public Game(Context context) {
         super(context);
@@ -47,7 +48,7 @@ public class Game extends SurfaceView implements Runnable, View.OnTouchListener{
                 Canvas canvas = holder.lockCanvas();
                 canvas.drawBitmap(fundo, 0, 0, null);
                 passaro.desenhaNoCanvas(canvas);
-                passaro.cai();
+                passaro.movimento(movimento);
                 canos.desenhaNoCanvas(canvas);
                 canos.move();
                 holder.unlockCanvasAndPost(canvas);
@@ -65,7 +66,18 @@ public class Game extends SurfaceView implements Runnable, View.OnTouchListener{
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        passaro.pula();
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                movimento = Passaro.SOBE;
+                return true;
+            case MotionEvent.ACTION_UP:
+                movimento = Passaro.DESCE;
+                return true;
+        }
         return false;
+
+        //Toast.makeText(tela.context, event.toString(), Toast.LENGTH_SHORT).show();
+
+
     }
 }
