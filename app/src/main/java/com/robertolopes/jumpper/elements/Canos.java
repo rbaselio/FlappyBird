@@ -11,13 +11,15 @@ import java.util.ListIterator;
 public class Canos {
     private final List<Cano> canos = new ArrayList<>();
     private final int QUANTIDADE_DE_CANOS = 400;
-    private final int DISTANCIAS_ENTRE_CANOS = 200;
+    private final int DISTANCIAS_ENTRE_CANOS = Cano.LARGURA_DO_CANO + (Tela.getLargura() / 7);
     private final Tela tela;
+    private Pontuacao pontuacao;
 
-    public Canos(Tela tela) {
+    public Canos(Tela tela, Pontuacao pontuacao) {
         this.tela = tela;
+        this.pontuacao = pontuacao;
         int posicao = QUANTIDADE_DE_CANOS;
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             posicao += DISTANCIAS_ENTRE_CANOS;
             Cano cano = new Cano(tela, posicao);
             canos.add(cano);
@@ -36,6 +38,7 @@ public class Canos {
             Cano cano = interator.next();
             cano.move();
             if (cano.saiuDaTela()) {
+                pontuacao.aumenta();
                 interator.remove();
                 Cano outroCano = new Cano(tela, getMaximo() + DISTANCIAS_ENTRE_CANOS);
                 interator.add(outroCano);

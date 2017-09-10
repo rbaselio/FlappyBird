@@ -7,8 +7,8 @@ import com.robertolopes.jumpper.graphic.Cores;
 import com.robertolopes.jumpper.graphic.Tela;
 
 public class Cano {
-    private static final int TAMANHO_DO_CANO = 250;
-    private static final int LARGURA_DO_CANO = 100;
+    public static final int TAMANHO_DO_CANO = 250;
+    public static final int LARGURA_DO_CANO = Tela.getLargura() / 7;
     private static final Paint VERDE = Cores.getCorDoCano();
     private int alturaDoCanoInferior;
     private int alturaDocanoSuperior;
