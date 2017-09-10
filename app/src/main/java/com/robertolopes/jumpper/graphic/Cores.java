@@ -23,7 +23,17 @@ public class Cores {
         paint.setTypeface(Typeface.DEFAULT_BOLD);
         paint.setShadowLayer(3, 5, 5, 0xFF000000);
 
+        return paint;
+    }
+
+    public static Paint getCorDoGameOver() {
+        Paint paint = new Paint();
+        paint.setColor(0xFFFF0000);
+        paint.setTextSize(80);
+        paint.setTypeface(Typeface.DEFAULT_BOLD);
+        paint.setShadowLayer(3, 5, 5, 0xFF000000);
 
         return paint;
+
     }
 }

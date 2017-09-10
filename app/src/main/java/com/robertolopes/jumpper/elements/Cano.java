@@ -50,4 +50,13 @@ public class Cano {
     public int getPosicao() {
         return posicao;
     }
+
+    public boolean temColisaoHorizontal(Passaro passaro) {
+        return this.posicao < Passaro.X + Passaro.RAIO;
+    }
+
+    public boolean temColisacaoVertical(Passaro passaro) {
+        return passaro.getAltura() - Passaro.RAIO < this.alturaDocanoSuperior ||
+                passaro.getAltura() + Passaro.RAIO > this.alturaDoCanoInferior;
+    }
 }

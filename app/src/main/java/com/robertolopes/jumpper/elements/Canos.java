@@ -53,4 +53,14 @@ public class Canos {
         }
         return maximo;
     }
+
+    public boolean temColisao(Passaro passaro) {
+        for (Cano cano : canos) {
+            if (cano.temColisaoHorizontal(passaro) &&
+                    cano.temColisacaoVertical(passaro)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
