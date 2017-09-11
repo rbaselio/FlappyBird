@@ -17,6 +17,7 @@ import com.robertolopes.jumpper.elements.Pontuacao;
 import com.robertolopes.jumpper.graphic.Tela;
 
 public class Game extends SurfaceView implements Runnable, View.OnTouchListener {
+    private Context context;
     private boolean isRunning;
     private SurfaceHolder holder = getHolder();
     private Passaro passaro;
@@ -29,36 +30,41 @@ public class Game extends SurfaceView implements Runnable, View.OnTouchListener 
     public Game(Context context) {
         super(context);
         tela = new Tela(context);
+        this.context = context;
         inicializaElementos();
         setOnTouchListener(this);
     }
 
     private void inicializaElementos() {
-        passaro = new Passaro(tela);
         pontuacao = new Pontuacao();
-        canos = new Canos(tela, pontuacao);
+        passaro = new Passaro(tela, pontuacao, context);
+        canos = new Canos(tela, pontuacao, context);
         Bitmap bt = BitmapFactory.decodeResource(getResources(), R.mipmap.background);
         tela = new Tela(this.getContext());
         fundo = Bitmap.createScaledBitmap(bt, bt.getWidth(), tela.getAltura(), false);
+        inicia();
     }
 
     @Override
     public void run() {
         while (isRunning) {
             if (holder.getSurface().isValid()) {
+
                 Canvas canvas = holder.lockCanvas();
                 canvas.drawBitmap(fundo, 0, 0, null);
+
                 passaro.desenhaNoCanvas(canvas);
                 passaro.movimento(movimento);
+
                 canos.desenhaNoCanvas(canvas);
                 canos.move();
+
                 pontuacao.desenhaNoCanvas(canvas);
 
                 if (new VerificadorDeColisao(passaro, canos).temColisao()) {
                     new GameOver(tela).desenhaNo(canvas);
-                    isRunning = false;
+                    pausa();
                 }
-
 
                 holder.unlockCanvasAndPost(canvas);
             }
@@ -84,8 +90,5 @@ public class Game extends SurfaceView implements Runnable, View.OnTouchListener 
                 return true;
         }
         return false;
-
-        //Toast.makeText(tela.context, event.toString(), Toast.LENGTH_SHORT).show();
-
     }
 }
