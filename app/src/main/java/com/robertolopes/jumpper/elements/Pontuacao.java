@@ -3,6 +3,7 @@ package com.robertolopes.jumpper.elements;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
+import com.robertolopes.jumpper.engine.Som;
 import com.robertolopes.jumpper.graphic.Cores;
 
 public class Pontuacao {
@@ -17,7 +18,8 @@ public class Pontuacao {
         canvas.drawText(String.valueOf(pontos), 100, 100, BRANCO);
     }
 
-    public void aumenta() {
+    public void aumenta(Som som) {
+        som.toca(Som.PONTO);
         pontos++;
     }
 }

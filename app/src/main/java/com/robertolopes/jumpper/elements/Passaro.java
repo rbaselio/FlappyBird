@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import com.robertolopes.jumpper.R;
+import com.robertolopes.jumpper.engine.Som;
 import com.robertolopes.jumpper.graphic.Cores;
 import com.robertolopes.jumpper.graphic.Tela;
 
@@ -18,11 +19,15 @@ public class Passaro {
     private static final Paint VERMELHO = Cores.getCorDoPassaro();
     private final Tela tela;
     private final Bitmap passaro;
+    private final Context context;
+    private final Som som;
     private float altura;
     private Pontuacao pontos;
 
-    public Passaro(Tela tela, Pontuacao pontos, Context context) {
+    public Passaro(Tela tela, Pontuacao pontos, Context context, Som som) {
         this.pontos = pontos;
+        this.context = context;
+        this.som = som;
         this.altura = 100;
         this.tela = tela;
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.passaro);
@@ -40,6 +45,7 @@ public class Passaro {
             if (!chegouNoChao) this.altura += aceleracao;
         }
         if (direcao == SOBE) {
+            som.toca(Som.PULO);
             if (altura > RAIO) this.altura -= aceleracao;
             else this.altura = RAIO;
         }

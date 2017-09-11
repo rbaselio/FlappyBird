@@ -17,6 +17,7 @@ import com.robertolopes.jumpper.elements.Pontuacao;
 import com.robertolopes.jumpper.graphic.Tela;
 
 public class Game extends SurfaceView implements Runnable, View.OnTouchListener {
+    private final Som som;
     private Context context;
     private boolean isRunning;
     private SurfaceHolder holder = getHolder();
@@ -31,14 +32,15 @@ public class Game extends SurfaceView implements Runnable, View.OnTouchListener 
         super(context);
         tela = new Tela(context);
         this.context = context;
+        som = new Som(context);
         inicializaElementos();
         setOnTouchListener(this);
     }
 
     private void inicializaElementos() {
         pontuacao = new Pontuacao();
-        passaro = new Passaro(tela, pontuacao, context);
-        canos = new Canos(tela, pontuacao, context);
+        passaro = new Passaro(tela, pontuacao, context, som);
+        canos = new Canos(tela, pontuacao, context, som);
         Bitmap bt = BitmapFactory.decodeResource(getResources(), R.mipmap.background);
         tela = new Tela(this.getContext());
         fundo = Bitmap.createScaledBitmap(bt, bt.getWidth(), tela.getAltura(), false);

@@ -3,6 +3,7 @@ package com.robertolopes.jumpper.elements;
 import android.content.Context;
 import android.graphics.Canvas;
 
+import com.robertolopes.jumpper.engine.Som;
 import com.robertolopes.jumpper.graphic.Tela;
 
 import java.util.ArrayList;
@@ -16,11 +17,13 @@ public class Canos {
     private final Tela tela;
     private Pontuacao pontuacao;
     private Context context;
+    private Som som;
 
-    public Canos(Tela tela, Pontuacao pontuacao, Context context) {
+    public Canos(Tela tela, Pontuacao pontuacao, Context context, Som som) {
         this.tela = tela;
         this.pontuacao = pontuacao;
         this.context = context;
+        this.som = som;
         int posicao = QUANTIDADE_DE_CANOS;
         for (int i = 0; i < 5; i++) {
             posicao += DISTANCIAS_ENTRE_CANOS;
@@ -41,7 +44,7 @@ public class Canos {
             Cano cano = interator.next();
             cano.move();
             if (cano.saiuDaTela()) {
-                pontuacao.aumenta();
+                pontuacao.aumenta(som);
                 interator.remove();
                 Cano outroCano = new Cano(tela, getMaximo() + DISTANCIAS_ENTRE_CANOS, pontuacao, context);
                 interator.add(outroCano);
@@ -61,6 +64,7 @@ public class Canos {
         for (Cano cano : canos) {
             if (cano.temColisaoHorizontal(passaro) &&
                     cano.temColisacaoVertical(passaro)) {
+                som.toca(Som.GAMEOVER);
                 return true;
             }
         }

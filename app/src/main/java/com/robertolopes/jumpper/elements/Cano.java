@@ -4,17 +4,14 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 
 import com.robertolopes.jumpper.R;
-import com.robertolopes.jumpper.graphic.Cores;
 import com.robertolopes.jumpper.graphic.Tela;
 
 import static com.robertolopes.jumpper.elements.Passaro.RAIO;
 
 public class Cano {
     public static final int LARGURA_DO_CANO = Tela.getLargura() / 7;
-    private static final Paint VERDE = Cores.getCorDoCano();
     private Bitmap canoInferior;
     private Bitmap canoSuperior;
     private int alturaDoCanoInferior;
